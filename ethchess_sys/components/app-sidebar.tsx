@@ -13,8 +13,8 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import Image from "next/image"
 import { GalleryVerticalEndIcon, AudioLinesIcon, TerminalIcon, TerminalSquareIcon, BotIcon, BookOpenIcon, Settings2Icon, FrameIcon, PieChartIcon, MapIcon } from "lucide-react"
-
 // This is sample data.
 const data = {
   user: {
@@ -24,12 +24,12 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "ETHCHESS",
+      // Use an image placed in the public/ directory, e.g. public/ethchess-logo.png
       logo: (
-        <GalleryVerticalEndIcon
-        />
+        <Image src="/ETHCHESS.jpg" alt="ETHCHESS" width={28} height={28} />
       ),
-      plan: "Enterprise",
+      plan: "Admin",
     },
     {
       name: "Acme Corp.",
@@ -181,10 +181,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
-      <SidebarContent>
+      {/* <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
-      </SidebarContent>
+      </SidebarContent> */}
+      <div className="flex flex-col gap-2 px-2 py-4 h-full">
+        
+      </div>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
