@@ -18,19 +18,38 @@ import {
 
 export function InputForm() {
   const countries = [
-    { label: "United States", value: "us" },
-    { label: "United Kingdom", value: "uk" },
-    { label: "Canada", value: "ca" },
+    { label: "United States", id: "1" },
+    { label: "United Kingdom", id: "2" },
+    { label: "Canada", id: "3" },
   ]
   return (
-    <form className="w-full max-w-sm">
+    <form className="w-full max-w-sm ">
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor="form-name">Name</FieldLabel>
+          <FieldLabel htmlFor="form-first-name">First Name</FieldLabel>
           <Input
-            id="form-name"
+            id="form-first-name"
             type="text"
-            placeholder="Evil Rabbit"
+            placeholder="Abebe"
+            required
+            className="mt-4"
+          />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="form-middle-name">Middle Name</FieldLabel>
+          <Input
+            id="form-middle-name"
+            type="text"
+            placeholder="Kebede"
+            required
+          />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="form-last-name">Last Name</FieldLabel>
+          <Input
+            id="form-last-name"
+            type="text"
+            placeholder="Alemu"
             required
           />
         </Field>
@@ -44,18 +63,18 @@ export function InputForm() {
         <div className="grid grid-cols-2 gap-4">
           <Field>
             <FieldLabel htmlFor="form-phone">Phone</FieldLabel>
-            <Input id="form-phone" type="tel" placeholder="+1 (555) 123-4567" />
+            <Input id="form-phone" type="tel" placeholder="+251 12 345 6789" />
           </Field>
           <Field>
-            <FieldLabel htmlFor="form-country">Country</FieldLabel>
-            <Select items={countries} defaultValue="us">
+            <FieldLabel htmlFor="form-country">Subcity</FieldLabel>
+            <Select defaultValue="United States" >
               <SelectTrigger id="form-country">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   {countries.map((country) => (
-                    <SelectItem key={country.value} value={country.value}>
+                    <SelectItem key={country.id} value={country.label}>
                       {country.label}
                     </SelectItem>
                   ))}
@@ -67,6 +86,10 @@ export function InputForm() {
         <Field>
           <FieldLabel htmlFor="form-address">Address</FieldLabel>
           <Input id="form-address" type="text" placeholder="123 Main St" />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="form-password">Password</FieldLabel>
+          <Input id="form-password" type="password" placeholder="••••••••" />
         </Field>
         <Field orientation="horizontal">
           <Button type="button" variant="outline">
