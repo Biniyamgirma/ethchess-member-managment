@@ -98,8 +98,13 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOutIcon
+            <DropdownMenuItem onClick={() => {
+              // Clear the JWT token from localStorage
+              localStorage.removeItem("jwtToken");
+              // Redirect to the login page
+              window.location.href = "/"; 
+            }}>
+              <LogOutIcon 
               />
               Log out
             </DropdownMenuItem>

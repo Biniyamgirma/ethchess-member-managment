@@ -1,3 +1,4 @@
+"use client"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 import { MembersTable } from "@/components/members_list/membersTable"
 export default function Page() {
+
   return (
     <SidebarProvider>
       <AppSidebar />

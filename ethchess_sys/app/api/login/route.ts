@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/utils/prisma";
 import { verifyPassword } from "@/lib/auth-utils";
-import jwt from "jsonwebtoken";
-const JWT_SECRET = process.env.JWT_SECRET || "a_secure_local_fallback_secret_key";
+import { generateToken } from "@/lib/jwt/token-generator";
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
@@ -34,17 +33,21 @@ export async function POST(request: NextRequest) {
         );
         }
         // 6. Generate the JWT Payload and Token
-    const token = jwt.sign(
-      {
+    const token = generateToken({
         userId: user.id,
         role: user.role || "MEMBER",
         fullName: `${user.f_name || ""} ${user.l_name || ""}`.trim(),
-      },
-      JWT_SECRET,
-      { expiresIn: "1d" } // Token expires in 24 hours
-    );
+      });
+      const response = NextResponse.json({ message: "Login successful" });
+response.cookies.set("token", token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  maxAge: 60 * 60 * 24 * 7, // 7 days
+  path: "/",
+});
+return response;
 
-        return NextResponse.json({ message: "Login successful.",token: token,user:secureUserData  }, { status: 200 });
     } catch (error) {
         console.error("Login error:", error);
         return NextResponse.json({ error: "Internal server error." }, { status: 500 });

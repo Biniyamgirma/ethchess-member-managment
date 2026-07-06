@@ -85,6 +85,7 @@ model Members {
   m_name                  String?               @db.VarChar(255)
   l_name                  String?               @db.VarChar(255)
   phone                   String?               @db.VarChar(255)
+  email                   String?
   telegram_username       String?               @db.VarChar(255)
   trophy                  String?               @db.VarChar(255)
   member_title            String?               @db.VarChar(255)
