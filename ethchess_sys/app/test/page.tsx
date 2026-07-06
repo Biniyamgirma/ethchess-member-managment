@@ -5,9 +5,9 @@ import { TotalFeeCarousel } from '@/components/carousel/total-fee'
 function page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  w-full space-y-6">
-     {/* <StartMatchPopover />
-     <StopMatchPopover /> */}
-     <TotalFeeCarousel />
+     <StartMatchPopover />
+     <StopMatchPopover />
+     {/* <TotalFeeCarousel /> */}
     </div>
   )
 }

@@ -43,11 +43,11 @@ export default function Page() {
           Please ensure that your credentials are correct before submitting the form.
         </FieldDescription>
       </Field>
-      <Field orientation="horizontal">
-        <Button className='py-2 px-4' type="reset" variant="outline">
-          Reset
+      <Field orientation="vertical" className="space-y-2">
+        <Button className='py-3 px-4' type="reset" variant="outline">
+          Register
         </Button>
-        <Button className="py-2 px-4 bg-accent-foreground " type="submit">
+        <Button className="py-3 px-4 bg-accent-foreground " type="submit">
           Submit
         </Button>
       </Field>

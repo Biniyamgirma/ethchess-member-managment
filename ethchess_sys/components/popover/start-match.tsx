@@ -30,7 +30,7 @@ export function StartMatchPopover() {
                 Customer Id
                 
               </FieldLabel>
-              <Input id="width" defaultValue="ETH001 / U001" />
+              <Input id="width" defaultValue="" placeholder="ETH001 / U001" />
             </Field>
             <Field orientation="horizontal">
               <Input id="height" type="button" defaultValue="Start Match" /> <div className="bg-green-200 size-3 rounded-full"></div>

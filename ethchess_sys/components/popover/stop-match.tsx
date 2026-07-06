@@ -29,7 +29,7 @@ export function StopMatchPopover() {
               <FieldLabel htmlFor="user-id" className="w-1/2">
                 Customer Id
               </FieldLabel>
-              <Input id="user-id" defaultValue="ETH001 / U001" />
+              <Input id="user-id" defaultValue="" placeholder="ETH001 / U001" />
             </Field>
             <Field orientation="horizontal">
               <Input id="calculate-fees" type="button" defaultValue="Calculate fees" /> <div className="bg-green-500 size-3 rounded-full"></div>

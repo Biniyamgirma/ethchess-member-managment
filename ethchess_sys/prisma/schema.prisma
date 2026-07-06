@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Payment {
+  id              Int                  @id @default(autoincrement())
+  user_id         String?              @unique @db.VarChar(7)
+  subscription_id Int?                 @unique
+  amount          Decimal?             @db.Decimal
+  paid_date       DateTime?            @db.Timestamp(6)
+  payment_type    String?              @db.VarChar(255)
+  payment_method  String?              @db.VarChar(255)
+  payment_status  String?              @db.VarChar(255)
+  approved_by     String?              @db.VarChar(255)
+  screenshot      String?              @db.VarChar(255)
+  created_at      DateTime?            @db.Timestamp(6)
+
+  // Explicit foreign keys living on the Payment table
+  member          Members?             @relation("MemberToPayment", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  subscription    MemberSubscriptions? @relation("SubscriptionToPayment", fields: [subscription_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("payment")
+}
+
+model MatchHistory {
+  id              Int       @id @default(autoincrement())
+  user_id         String?   @unique @db.VarChar(7)
+  started_at      DateTime? @db.Timestamp(6)
+  game_end_at     DateTime? @db.Timestamp(6)
+  min             Int?
+  white_player_id String?   @unique @db.VarChar(7)
+  black_player_id String?   @unique @db.VarChar(7)
+  result          String?   @db.VarChar(255)
+
+  // Explicit foreign keys living on the MatchHistory table
+  member_user     Members?  @relation("MemberToMatchUser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  member_white    Members?  @relation("MemberToMatchWhite", fields: [white_player_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  member_black    Members?  @relation("MemberToMatchBlack", fields: [black_player_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("match_history")
+}
+
+model MembershipTiers {
+  id            Int                   @id @default(autoincrement())
+  name          String?               @unique @db.VarChar(25)
+  price         Decimal?              @db.Decimal
+  duration_days Int?
+  created_at    DateTime?             @db.Timestamp(6)
+  updated_at    DateTime?             @db.Timestamp(6)
+  
+  subscriptions MemberSubscriptions[]
+
+  @@map("membership_tiers")
+}
+
+model MemberSubscriptions {
+  id                  Int              @id @default(autoincrement())
+  user_id             String?          @unique @db.VarChar(7)
+  tier_id             Int?
+  start_date          DateTime?        @db.Timestamp(6)
+  end_date            DateTime?        @db.Timestamp(6)
+  subscription_status String?          @db.VarChar(255)
+
+  // Relations mapping
+  tier                MembershipTiers? @relation(fields: [tier_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  member              Members?         @relation("MemberToSubscription", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  // Clean reverse relation (FK side is on Payment)
+  payment             Payment?         @relation("SubscriptionToPayment")
+
+  @@map("member_subscriptions")
+}
+
+model Members {
+  id                      String                @id @db.VarChar(7)
+  f_name                  String?               @db.VarChar(255)
+  m_name                  String?               @db.VarChar(255)
+  l_name                  String?               @db.VarChar(255)
+  phone                   String?               @db.VarChar(255)
+  telegram_username       String?               @db.VarChar(255)
+  trophy                  String?               @db.VarChar(255)
+  member_title            String?               @db.VarChar(255)
+  eth_chess_rating        Int?
+  password                String?               @db.VarChar(255)
+  subcity                 Int
+  address                 String?               @db.VarChar(255)
+  profile_picture         String?               @db.VarChar(655)
+  status                  Int?
+  is_deleted              Int?
+  is_monthly_payment_paid Int?
+  role                    String?               @db.VarChar(55)
+  created_at              DateTime?             @db.Timestamp(6)
+  updated_at              DateTime?             @db.Timestamp(6)
+  fide_standard_rating    Int?
+  fide_rapid_rating       Int?
+  fide_blitz_rating       Int?
+  user_from               String? @db.VarChar(55)
+
+  payment                 Payment?              @relation("MemberToPayment")
+  subscription            MemberSubscriptions?  @relation("MemberToSubscription")
+  match_history_user      MatchHistory?         @relation("MemberToMatchUser")
+  match_history_white     MatchHistory?         @relation("MemberToMatchWhite")
+  match_history_black     MatchHistory?         @relation("MemberToMatchBlack")
+  member_details          MemberDetails?        @relation("MemberToDetails")
+  ethchess_point          EthchessMemberPoint?  @relation("MemberToPoints")
+
+  @@map("members")
+}
+
+model MemberDetails {
+  id                          Int      @id @default(autoincrement())
+  user_id                     String?  @unique @db.VarChar(7)
+  chess_dot_com_username      String?  @db.VarChar(255)
+  lichess_username            String?  @db.VarChar(255)
+  lichess_classical_rating    Int?
+  lichess_rapid_rating        Int?
+  lichess_blitz_rating        Int?
+  lichess_bullet_rating       Int?
+  chess_dot_com_bullet_rating Int?
+  chess_dot_com_blitz_rating  Int?
+  chess_dot_com_rapid_rating  Int?
+
+  // One-to-one side holding the relation fields
+  member                      Members? @relation("MemberToDetails", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("member_details")
+}
+
+model EthchessMemberPoint {
+  id          Int      @id @default(autoincrement())
+  user_id     String?  @unique @db.VarChar(7)
+  paid_in     Int?
+  paid_out    Int?
+  change_form String?  @db.VarChar(255)
+  created_at  String?  @db.VarChar(255)
+
+  // One-to-one side holding the relation fields
+  member      Members? @relation("MemberToPoints", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("ethchess_member_point")
+}

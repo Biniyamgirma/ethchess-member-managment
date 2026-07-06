@@ -18,10 +18,51 @@ import {
 
 export function InputForm() {
   const countries = [
-    { label: "United States", id: "1" },
-    { label: "United Kingdom", id: "2" },
-    { label: "Canada", id: "3" },
-  ]
+  {
+    id: 1022,
+    label: "Akaki Kality"
+  },
+  {
+    id: 1023,
+    label: "Nifas Silk Lafto"
+  },
+  {
+    id: 1024,
+    label: "Kolfe Keraniyo"
+  },
+  {
+    id: 1025,
+    label: "Bole"
+  },
+  {
+    id: 1026,
+    label: "Lideta"
+  },
+  {
+    id: 1027,
+    label: "Kirkos"
+  },
+  {
+    id: 1028,
+    label: "Yeka"
+  },
+  {
+    id: 1029,
+    label: "Addis Ketema"
+  },
+  {
+    id: 1030,
+    label: "Arada"
+  },
+  {
+    id: 1031,
+    label: "Gulele"
+  },
+  {
+    id: 1032,
+    label: "Lemi Kura"
+  }
+]
   return (
     <form className="w-full max-w-sm ">
       <FieldGroup>
@@ -67,7 +108,7 @@ export function InputForm() {
           </Field>
           <Field>
             <FieldLabel htmlFor="form-country">Subcity</FieldLabel>
-            <Select defaultValue="United States" >
+            <Select id="form-country" name="subcity" required >
               <SelectTrigger id="form-country">
                 <SelectValue />
               </SelectTrigger>
@@ -85,11 +126,20 @@ export function InputForm() {
         </div>
         <Field>
           <FieldLabel htmlFor="form-address">Address</FieldLabel>
-          <Input id="form-address" type="text" placeholder="123 Main St" />
+          <Input id="form-address" type="text" placeholder="Megenana" />
         </Field>
         <Field>
           <FieldLabel htmlFor="form-password">Password</FieldLabel>
           <Input id="form-password" type="password" placeholder="••••••••" />
+        </Field>
+         <Field>
+          <FieldLabel htmlFor="form-About-Us">Where Did You Hear About Us?</FieldLabel>
+          <Input
+            id="form-About-Us"
+            type="text"
+            placeholder="instagram, facebook, youtube, etc"
+            required
+          />
         </Field>
         <Field orientation="horizontal">
           <Button type="button" variant="outline">
