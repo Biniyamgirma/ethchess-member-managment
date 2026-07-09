@@ -39,7 +39,9 @@ export function InputForm() {
   const [firstName, setFirstName] = useState("")
   const [middleName, setMiddleName] = useState("")
   const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
+  const [telegram,setTelegram] = useState("")
+  const [lichess,setLichess] = useState("")
+  const [cdc,setCdc] = useState("")
   const [phone, setPhone] = useState("")
   const [subcity, setSubcity] = useState("")
   const [address, setAddress] = useState("")
@@ -65,12 +67,14 @@ export function InputForm() {
           firstName: firstName.trim(),
           middleName: middleName.trim(),
           lastName: lastName.trim(),
-          email: email.trim(),
+          telegram: telegram.trim(),
           phone: phone.trim(),
           subcity: subcity,
           address: address.trim(),
           password: password,
           userFrom: userFrom.trim(),
+          lichess:lichess.trim(),
+          cdc:cdc.trim()
         }),
       })
 
@@ -90,13 +94,14 @@ export function InputForm() {
       setFirstName("")
       setMiddleName("")
       setLastName("")
-      setEmail("")
+      setTelegram("")
       setPhone("")
       setSubcity("")
       setAddress("")
       setPassword("")
       setUserFrom("")
-
+      setCdc("")
+      setLichess("")
     } catch (err: any) {
       toast.error(err.message || "An unexpected error occurred.")
     } finally {
@@ -146,13 +151,13 @@ export function InputForm() {
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="form-email">Email</FieldLabel>
+            <FieldLabel htmlFor="form-telegram">Telegram Username</FieldLabel>
             <Input 
-              id="form-email" 
-              type="email" 
-              placeholder="john@example.com" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value ?? "")}
+              id="form-telegram" 
+              type="text" 
+              placeholder="@hello_" 
+              value={telegram}
+              onChange={(e) => setTelegram(e.target.value ?? "")}
               disabled={isLoading}
             />
             <FieldDescription>
@@ -191,6 +196,30 @@ export function InputForm() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+            </Field>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Field>
+              <FieldLabel htmlFor="form-lichess">Lichess Username</FieldLabel>
+              <Input 
+                id="form-lichess" 
+                type="text" 
+                placeholder="The_rook" 
+                value={lichess}
+                onChange={(e) => setLichess(e.target.value ?? "")}
+                disabled={isLoading}
+              />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="form-cdc">Chess.com Username</FieldLabel>
+              <Input 
+                id="form-cdc" 
+                type="text" 
+                placeholder="hunter_01" 
+                value={cdc}
+                onChange={(e) => setCdc(e.target.value ?? "")}
+                disabled={isLoading}
+              />
             </Field>
           </div>
           <Field>

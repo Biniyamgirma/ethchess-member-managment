@@ -14,12 +14,14 @@ export async function POST(request: Request) {
       firstName, 
       middleName, 
       lastName, 
-      email, 
+      telegram, 
       phone, 
       subcity, 
       address, 
       password, 
-      userFrom 
+      userFrom,
+      cdc,
+      lichess
     } = body;
 
     // 1. Basic validation
@@ -61,23 +63,29 @@ export async function POST(request: Request) {
         l_name: lastName,
         phone: phone || null,
         password: hashedPassword,
+        subcity:subcity || 102,
         address: fullAddress || null,
         user_from: userFrom || null,
-        telegram_username: email || null, // Temporary mapping since schema lacks an email field
+        telegram_username: telegram || null, // Temporary mapping since schema lacks an email field
         status: 1, // Defaulting to an active status integer
         is_deleted: 0,
         is_monthly_payment_paid: 0,
         role: "player", // Default role assignment
-        created_at: new Date(),
-        updated_at: new Date(),
       },
     });
 
+    const memeber_details = await prisma.memberDetails.create({
+      data: {
+        user_id:uniqueId,
+        chess_dot_com_username:cdc,
+        lichess_username:lichess
+      },
+    });
     // Return success without reflecting the raw password back
     const { password: _, ...secureMemberData } = newMember;
 
     return NextResponse.json(
-      { message: "Member registered successfully", member: secureMemberData },
+      { message: "Member registered successfully", member: secureMemberData,memeber_details:memeber_details },
       { status: 201 }
     );
 
