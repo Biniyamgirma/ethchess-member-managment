@@ -45,7 +45,8 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0 w-11/12">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" >
+            <h1>This page will be avalible soon stay tuned</h1>
+            {/* <div className="aspect-video rounded-xl bg-muted/50" >
                   <div className="flex items-center justify-center h-full">
                     <div>
                     <p className="text-muted-foreground">ETHCHESS Total Members</p>
@@ -70,9 +71,10 @@ export default function Page() {
                     </div>
                   </div>
             </div>
-          </div>
-          <div className="md:w-[960px] rounded-xl bg-muted/50 p-4 " >
+          </div> */}
+          {/* <div className="md:w-[960px] rounded-xl bg-muted/50 p-4 " >
             <MembersTable />
+          </div> */}
           </div>
         </div>
       </SidebarInset>
