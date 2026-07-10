@@ -27,8 +27,14 @@ export function NavUser({
 }: {
   user: {
     name: string
-    email: string
     avatar: string
+    role: string;
+    phone:string;
+    address: string;
+    subcity: string;
+    telegram_username: string;
+    member_title: string;
+    is_monthly_payment_paid:number
   }
 }) {
   const { isMobile } = useSidebar()
@@ -47,7 +53,7 @@ export function NavUser({
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs">{user.email}</span>
+              <span className="truncate text-xs">{user.telegram_username}</span>
             </div>
             <ChevronsUpDownIcon className="ml-auto size-4" />
           </DropdownMenuTrigger>
@@ -66,7 +72,7 @@ export function NavUser({
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
-                    <span className="truncate text-xs">{user.email}</span>
+                    <span className="truncate text-xs">{user.telegram_username}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>

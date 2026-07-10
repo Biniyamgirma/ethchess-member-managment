@@ -37,7 +37,6 @@ export function InputForm() {
 
   // Form states
   const [firstName, setFirstName] = useState("")
-  const [middleName, setMiddleName] = useState("")
   const [lastName, setLastName] = useState("")
   const [telegram,setTelegram] = useState("")
   const [lichess,setLichess] = useState("")
@@ -65,7 +64,6 @@ export function InputForm() {
         },
         body: JSON.stringify({
           firstName: firstName.trim(),
-          middleName: middleName.trim(),
           lastName: lastName.trim(),
           telegram: telegram.trim(),
           phone: phone.trim(),
@@ -92,7 +90,6 @@ export function InputForm() {
 
       // Reset form fields
       setFirstName("")
-      setMiddleName("")
       setLastName("")
       setTelegram("")
       setPhone("")
@@ -124,18 +121,6 @@ export function InputForm() {
               onChange={(e) => setFirstName(e.target.value ?? "")}
               disabled={isLoading}
               className="mt-4"
-            />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="form-middle-name">Middle Name</FieldLabel>
-            <Input
-              id="form-middle-name"
-              type="text"
-              placeholder="Kebede"
-              required
-              value={middleName}
-              onChange={(e) => setMiddleName(e.target.value)}
-              disabled={isLoading}
             />
           </Field>
           <Field>

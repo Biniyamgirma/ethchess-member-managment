@@ -1,6 +1,21 @@
 "use client"
 
 import * as React from "react"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import { 
+  AudioLinesIcon, 
+  TerminalIcon, 
+  GlobeCheck, 
+  BotIcon, 
+  BookOpenIcon, 
+  Settings2Icon, 
+  FrameIcon, 
+  PieChartIcon, 
+  MapIcon,
+  ChessKing,
+  Dice5
+} from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -13,183 +28,154 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
-import { GalleryVerticalEndIcon, AudioLinesIcon, TerminalIcon, TerminalSquareIcon, BotIcon, BookOpenIcon, Settings2Icon, FrameIcon, PieChartIcon, MapIcon } from "lucide-react"
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
+
+
+
+const staticData = {
   teams: [
     {
       name: "ETHCHESS",
-      // Use an image placed in the public/ directory, e.g. public/ethchess-logo.png
-      logo: (
-        <Image src="/ETHCHESS.jpg" alt="ETHCHESS" width={28} height={28} />
-      ),
+      logo: <Image src="/ETHCHESS.jpg" alt="ETHCHESS" width={28} height={28} />,
       plan: "Admin",
     },
-    {
-      name: "Acme Corp.",
-      logo: (
-        <AudioLinesIcon
-        />
-      ),
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: (
-        <TerminalIcon
-        />
-      ),
-      plan: "Free",
-    },
+    // {
+    //   name: "Acme Corp.",
+    //   logo: <AudioLinesIcon />,
+    //   plan: "Startup",
+    // },
+    // {
+    //   name: "Evil Corp.",
+    //   logo: <TerminalIcon />,
+    //   plan: "Free",
+    // },
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "ETHCHESS Admins",
       url: "#",
-      icon: (
-        <TerminalSquareIcon
-        />
-      ),
+      icon: <ChessKing />,
       isActive: true,
       items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
+        { title: "History", url: "/dashboard/history" },
+        { title: "info", url: "/dashboard/general_info" },
+        { title: "Settings", url: "/dashboard/settings" },
       ],
     },
     {
-      title: "Models",
+      title: "OTB Matchs",
       url: "#",
-      icon: (
-        <BotIcon
-        />
-      ),
+      icon: <Dice5 />,
       items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+        { title: "Genesis", url: "#" },
+        { title: "Explorer", url: "#" },
+        { title: "Quantum", url: "#" },
       ],
     },
     {
-      title: "Documentation",
+      title: "ETHchess Online Event",
       url: "#",
-      icon: (
-        <BookOpenIcon
-        />
-      ),
+      icon: <GlobeCheck />,
       items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
+        { title: "Introduction", url: "#" },
+        { title: "Get Started", url: "#" },
+        { title: "Tutorials", url: "#" },
+        { title: "Changelog", url: "#" },
       ],
     },
     {
       title: "Settings",
       url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
+      icon: <Settings2Icon />,
       items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
+        { title: "General", url: "#" },
+        { title: "Team", url: "#" },
+        { title: "Billing", url: "#" },
+        { title: "Limits", url: "#" },
       ],
     },
   ],
   projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: (
-        <FrameIcon
-        />
-      ),
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: (
-        <PieChartIcon
-        />
-      ),
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: (
-        <MapIcon
-        />
-      ),
-    },
+    { name: "Active Matchs", url: "/dashboard/chess_match", icon: <FrameIcon /> },
+    { name: "Current Earning", url: "/dashboard/comming_soon", icon: <PieChartIcon /> },
+    { name: "Match Setting", url: "/dashboard/comming_soon", icon: <MapIcon /> },
   ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [userRole, setUserRole] = useState<string | null>(null)
+  const [userData, setUserData] = useState<{
+  name: string;
+  avatar: string;
+  role: string;
+  phone:string;
+  address: string;
+  subcity: string;
+  telegram_username: string;
+  member_title: string;
+  is_monthly_payment_paid: number; // Adjusted to match your parsedUser fallback string ""
+}>({
+  name: "",
+  avatar: "/avatars/shadcn.jpg",
+  role: "",
+  phone:"",
+  address: "",
+  subcity: "",
+  telegram_username: "",
+  member_title: "",
+  is_monthly_payment_paid: 0,
+})
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUserRaw = localStorage.getItem("user")
+      
+      if (storedUserRaw) {
+        try {
+          const parsedUser = JSON.parse(storedUserRaw)
+          const fullName = `${parsedUser.f_name || ""} ${parsedUser.l_name || ""}`.trim()
+          
+          // 1. Capture and save the user's role to state
+          setUserRole(parsedUser.role) 
+          
+          setUserData({
+            name: fullName || "User",
+            avatar: parsedUser.profile_picture || "/avatars/shadcn.jpg",
+            phone:parsedUser.phone || "",
+            role:parsedUser.role || "",
+            address:parsedUser.address || "",
+            subcity:parsedUser.subCity || "",
+            telegram_username:parsedUser.telegram_username || "",
+            member_title:parsedUser.member_title || "",
+            is_monthly_payment_paid: parseInt(parsedUser.is_monthly_payment_paid, 10) ?? 0
+          })
+        } catch (error) {
+          console.error("Failed to parse user item from localStorage:", error)
+        }
+      }
+    }
+  }, [])
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={staticData.teams} />
       </SidebarHeader>
-      {/* <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-      </SidebarContent> */}
-      <div className="flex flex-col gap-2 px-2 py-4 h-full">
+      
+      <SidebarContent>
+        {/* NavMain remains visible to everyone */}
+        {userRole == "player" && (
+          <NavMain items={staticData.navMain} /> 
+        )
+        }
         
-      </div>
+        {/* 2. RBAC Guard: Only render NavProjects if the user is NOT a player */}
+        {userRole == "match-admin" && (
+           <NavProjects projects={staticData.projects} />
+        )}
+      </SidebarContent>
+      
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

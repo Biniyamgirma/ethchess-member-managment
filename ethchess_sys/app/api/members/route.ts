@@ -12,7 +12,6 @@ export async function POST(request: Request) {
     
     const { 
       firstName, 
-      middleName, 
       lastName, 
       telegram, 
       phone, 
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
     } = body;
 
     // 1. Basic validation
-    if (!firstName || !middleName || !lastName || !password) {
+    if (!firstName ||  !lastName || !password) {
       return NextResponse.json(
         { error: "Required fields are missing." },
         { status: 400 }
@@ -59,7 +58,6 @@ export async function POST(request: Request) {
       data: {
         id: uniqueId,
         f_name: firstName,
-        m_name: middleName,
         l_name: lastName,
         phone: phone || null,
         password: hashedPassword,

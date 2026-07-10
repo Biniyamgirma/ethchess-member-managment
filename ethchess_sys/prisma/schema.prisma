@@ -13,8 +13,8 @@ datasource db {
 
 model Payment {
   id              Int       @id @default(autoincrement())
-  user_id         String?   @unique @db.VarChar(7)
-  subscription_id Int?      @unique
+  user_id         String?    @db.VarChar(7)
+  subscription_id Int?      
   amount          Decimal?  @db.Decimal
   paid_date       DateTime? @db.Timestamp(6)
   payment_type    String?   @db.VarChar(255)
@@ -29,14 +29,15 @@ model Payment {
 
 model MatchHistory {
   id              Int       @id @default(autoincrement())
-  user_id         String?   @unique @db.VarChar(7)
+  user_id         String?   @db.VarChar(7)
   started_at      DateTime? @db.Timestamp(6)
   game_end_at     DateTime? @db.Timestamp(6)
   min             Int?
-  white_player_id String?   @unique @db.VarChar(7)
-  black_player_id String?   @unique @db.VarChar(7)
+  total_amount    Decimal?  @db.Decimal(10, 2)
+  status          Int?
+  white_player_id String?  @db.VarChar(7)
+  black_player_id String?  @db.VarChar(7)
   result          String?   @db.VarChar(255)
-
   @@map("match_history")
 }
 
@@ -53,7 +54,7 @@ model MembershipTiers {
 
 model MemberSubscriptions {
   id                  Int       @id @default(autoincrement())
-  user_id             String?   @unique @db.VarChar(7)
+  user_id             String?   @db.VarChar(7)
   tier_id             Int?
   start_date          DateTime? @db.Timestamp(6)
   end_date            DateTime? @db.Timestamp(6)
@@ -65,7 +66,6 @@ model MemberSubscriptions {
 model Members {
   id                      String    @id @unique @db.VarChar(7)
   f_name                  String?   @db.VarChar(255)
-  m_name                  String?   @db.VarChar(255)
   l_name                  String?   @db.VarChar(255)
   phone                   String?   @db.VarChar(255)
   email                   String?
@@ -93,7 +93,7 @@ model Members {
 
 model MemberDetails {
   id                          Int      @id @default(autoincrement())
-  user_id                     String?  @unique @db.VarChar(7)
+  user_id                     String?  @db.VarChar(7)
   chess_dot_com_username      String?  @db.VarChar(255)
   lichess_username            String?  @db.VarChar(255)
   lichess_classical_rating    Int?
@@ -110,7 +110,7 @@ model MemberDetails {
 
 model EthchessMemberPoint {
   id          Int      @id @default(autoincrement())
-  user_id     String?  @unique @db.VarChar(7)
+  user_id     String?  @db.VarChar(7)
   paid_in     Int?
   paid_out    Int?
   change_form String?  @db.VarChar(255)

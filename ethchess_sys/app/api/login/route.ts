@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { user_id, password } = body;
         
-        
         const user = await prisma.members.findUnique({
             where: { id: user_id },
         });
@@ -35,17 +34,17 @@ export async function POST(request: NextRequest) {
         // 6. Generate the JWT Payload and Token
     const token = generateToken({
         userId: user.id,
-        role: user.role || "MEMBER",
+        role: user.role || "player",
         fullName: `${user.f_name || ""} ${user.l_name || ""}`.trim(),
       });
-      const response = NextResponse.json({ message: "Login successful" });
-response.cookies.set("token", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
-  maxAge: 60 * 60 * 24 * 7, // 7 days
-  path: "/",
-});
+      const response = NextResponse.json({ message: "Login successful",user:secureUserData });
+        response.cookies.set("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+        path: "/",
+        });
 return response;
 
     } catch (error) {
