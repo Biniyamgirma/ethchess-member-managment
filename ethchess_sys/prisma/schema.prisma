@@ -16,13 +16,13 @@ model Payment {
   user_id         String?    @db.VarChar(7)
   subscription_id Int?      
   amount          Decimal?  @db.Decimal
-  paid_date       DateTime? @db.Timestamp(6)
+  paid_date DateTime @default(now())
   payment_type    String?   @db.VarChar(255)
   payment_method  String?   @db.VarChar(255)
   payment_status  String?   @db.VarChar(255)
   approved_by     String?   @db.VarChar(255)
   screenshot      String?   @db.VarChar(255)
-  created_at      DateTime? @db.Timestamp(6)
+  created_at DateTime @default(now())
 
   @@map("payment")
 }
@@ -30,7 +30,7 @@ model Payment {
 model MatchHistory {
   id              Int       @id @default(autoincrement())
   user_id         String?   @db.VarChar(7)
-  started_at      DateTime? @db.Timestamp(6)
+  started_at      DateTime?  @default(now())
   game_end_at     DateTime? @db.Timestamp(6)
   min             Int?
   total_amount    Decimal?  @db.Decimal(10, 2)
@@ -38,6 +38,8 @@ model MatchHistory {
   white_player_id String?  @db.VarChar(7)
   black_player_id String?  @db.VarChar(7)
   result          String?   @db.VarChar(255)
+  created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
   @@map("match_history")
 }
 
@@ -46,8 +48,8 @@ model MembershipTiers {
   name          String?   @unique @db.VarChar(25)
   price         Decimal?  @db.Decimal
   duration_days Int?
-  created_at    DateTime? @db.Timestamp(6)
-  updated_at    DateTime? @db.Timestamp(6)
+  created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 
   @@map("membership_tiers")
 }
@@ -59,7 +61,8 @@ model MemberSubscriptions {
   start_date          DateTime? @db.Timestamp(6)
   end_date            DateTime? @db.Timestamp(6)
   subscription_status String?   @db.VarChar(255)
-
+  created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
   @@map("member_subscriptions")
 }
 
@@ -81,8 +84,8 @@ model Members {
   is_deleted              Int?
   is_monthly_payment_paid Int?
   role                    String?   @db.VarChar(55)
-  created_at              DateTime? @default(now())
-  updated_at              DateTime? @default(now())
+  created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
   fide_standard_rating    Int?
   fide_rapid_rating       Int?
   fide_blitz_rating       Int?
@@ -104,6 +107,7 @@ model MemberDetails {
   chess_dot_com_blitz_rating  Int?
   chess_dot_com_rapid_rating  Int?
   created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 
   @@map("member_details")
 }
@@ -114,7 +118,8 @@ model EthchessMemberPoint {
   paid_in     Int?
   paid_out    Int?
   change_form String?  @db.VarChar(255)
-  created_at  DateTime @default(now())
-
+  created_at                  DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
   @@map("ethchess_member_point")
 }
+

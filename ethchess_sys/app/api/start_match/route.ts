@@ -31,7 +31,6 @@ export async function POST(request: NextRequest){
         const response = await prisma.matchHistory.create({
             data:{
                 user_id:user_id,
-                started_at:new Date(),
                 result:'on_going'
             }
         })

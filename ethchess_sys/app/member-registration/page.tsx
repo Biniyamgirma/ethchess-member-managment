@@ -1,5 +1,3 @@
-
-
 import  {InputForm} from '@/components/member-registration-form'
 import Image from 'next/image'
 import ethchess_logo from '@/public/ETHCHESS.jpg'

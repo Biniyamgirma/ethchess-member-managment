@@ -75,8 +75,8 @@ export default function Page() {
           />
         </div>
 
-        <h1 className="text-2xl font-bold">Welcome to ETHCHESS</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl font-bold text-center">Welcome to ETHCHESS</h1>
+        <p className="text-muted-foreground text-center">
           Please fill out the form below to get started.
         </p>
         
