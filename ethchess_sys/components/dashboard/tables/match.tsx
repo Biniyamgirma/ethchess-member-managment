@@ -5,17 +5,7 @@ import { useEffect,useState } from "react"
 
 
 export   function DemoPage() {
-  const [data, setData] = useState<Match[]>([{
-    user_id: "N/A",
-  match_id:"N/A",
-  first_name: "N/A",
-  phone:"+251-928250000",
-  game_started_at: new Date("1970-01-01T00:00:00.000Z"),
-  game_end_at:new Date("1970-01-01T00:00:00.000Z"),
-  min:0,
-  result:"N/A",
-  total_amount:0.00
-  }]);
+  const [data, setData] = useState<Match[]>([]);
 
   useEffect(() => {
     async function getData() {

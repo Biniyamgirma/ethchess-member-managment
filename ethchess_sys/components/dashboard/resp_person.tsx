@@ -25,7 +25,7 @@ export function MatchManager() {
           <EndMatch />
         </div>
     <div className="max-w-full  ">
-      <h1 className="text-2xl font-bold">Chess Match Data</h1>
+      <h1 className="text-2xl font-bold">Game Records</h1>
     <DemoPage />
     </div>
     </div>
