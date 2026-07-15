@@ -1,3 +1,4 @@
+"use client"
 import { columns, Match } from "@/components/match_history/columns"
 import { DataTable } from "@/components/match_history/data-table"
 import { useEffect,useState } from "react"
@@ -14,7 +15,7 @@ export   function DemoPage() {
         const response = await fetch('/api/match_data');
         const res = await response.json();
         
-        setData(res.data);
+        setData(res.data || []);
       } catch (error) {
         console.error("Error fetching match data:", error);
       }
