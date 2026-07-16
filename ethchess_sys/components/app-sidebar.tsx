@@ -51,14 +51,14 @@ const staticData = {
   ],
   navMain: [
     {
-      title: "ETHCHESS Admins",
+      title: "ETHCHESS Event",
       url: "#",
       icon: <ChessKing />,
       isActive: true,
       items: [
         { title: "History", url: "/dashboard/history" },
-        { title: "info", url: "/dashboard/general_info" },
-        { title: "Settings", url: "/dashboard/settings" },
+        { title: "info", url: "/dashboard/user_front_page" },
+        { title: "Settings", url: "/dashboard/comming_soon" },
       ],
     },
     {
@@ -66,9 +66,9 @@ const staticData = {
       url: "#",
       icon: <Dice5 />,
       items: [
-        { title: "Genesis", url: "#" },
-        { title: "Explorer", url: "#" },
-        { title: "Quantum", url: "#" },
+        { title: "Genesis", url: "/dashboard/comming_soon" },
+        { title: "Explorer", url: "/dashboard/comming_soon" },
+        { title: "Quantum", url: "/dashboard/comming_soon" },
       ],
     },
     {
@@ -76,10 +76,10 @@ const staticData = {
       url: "#",
       icon: <GlobeCheck />,
       items: [
-        { title: "Introduction", url: "#" },
-        { title: "Get Started", url: "#" },
-        { title: "Tutorials", url: "#" },
-        { title: "Changelog", url: "#" },
+        { title: "Introduction", url: "/dashboard/comming_soon" },
+        { title: "Get Started", url: "/dashboard/comming_soon" },
+        { title: "Tutorials", url: "/dashboard/comming_soon" },
+        { title: "Changelog", url: "/dashboard/comming_soon" },
       ],
     },
     {
@@ -87,15 +87,15 @@ const staticData = {
       url: "#",
       icon: <Settings2Icon />,
       items: [
-        { title: "General", url: "#" },
-        { title: "Team", url: "#" },
-        { title: "Billing", url: "#" },
-        { title: "Limits", url: "#" },
+        { title: "General", url: "/dashboard/comming_soon" },
+        { title: "Team", url: "/dashboard/comming_soon" },
+        { title: "Billing", url: "/dashboard/comming_soon" },
+        { title: "Limits", url: "/dashboard/comming_soon" },
       ],
     },
   ],
   projects: [
-    { name: "Active Matchs", url: "/dashboard/chess_match", icon: <FrameIcon /> },
+    { name: "Active Matchs", url: "/dashboard/comming_soon", icon: <FrameIcon /> },
     { name: "Current Earning", url: "/dashboard/comming_soon", icon: <PieChartIcon /> },
     { name: "Match Setting", url: "/dashboard/comming_soon", icon: <MapIcon /> },
   ],
