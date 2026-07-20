@@ -64,7 +64,7 @@ export const columns: ColumnDef<Match>[] = [
       const resultVal = row.getValue("result");
       if(!resultVal) return "N/A";
 
-      return (resultVal=="completed" ? <div className="bg-green-400 py-2 px-4 rounded-2xl">completed</div> :resultVal=="on_going"  ? <div className="bg-yellow-400 py-2 px-4 rounded-2xl">Canceled</div> : <div className="bg-red-400 py-2 px-4 rounded-2xl">Canceled</div>)
+      return (resultVal=="completed" ? <div className="bg-green-400 py-2 px-4 rounded-2xl">completed</div> :resultVal=="on_going"  ? <div className="bg-yellow-400 py-2 px-4 rounded-2xl">On Going</div> : <div className="bg-red-400 py-2 px-4 rounded-2xl">Canceled</div>)
     }
   },
   {
